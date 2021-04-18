@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <TodoList :TodoList="Todos" />
+    <Refs />
   </div>
 </template>
 <script>
-import TodoList from "./features/TodoList/TodoList";
+import Refs from "./features/Refs/Refs";
 
 export default {
   name: "App",
@@ -13,17 +13,8 @@ export default {
       Todos: [],
     };
   },
-  mounted() {
-    const self = this;
-    async function fetchTodo() {
-      const respone = await fetch("https://jsonplaceholder.typicode.com/todos");
-      const responeJSON = await respone.json();
-      self.Todos = responeJSON;
-    }
-    fetchTodo();
-  },
   components: {
-    TodoList,
+    Refs,
   },
 };
 </script>
