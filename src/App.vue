@@ -1,28 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <LifeCycle/>
+    <TodoList :TodoList="Todos" />
   </div>
 </template>
-
 <script>
-import LifeCycle from './components/LifeCycle.vue'
+import TodoList from "./features/TodoList/TodoList";
 
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      Todos: [],
+    };
+  },
+  mounted() {
+    const self = this;
+    async function fetchTodo() {
+      const respone = await fetch("https://jsonplaceholder.typicode.com/todos");
+      const responeJSON = await respone.json();
+      self.Todos = responeJSON;
+    }
+    fetchTodo();
+  },
   components: {
-    LifeCycle
-  }
-}
+    TodoList,
+  },
+};
 </script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 800;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 </style>
